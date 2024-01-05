@@ -1,5 +1,5 @@
 # Diamond-1-Hardhat Implementation
-Testing creation and deploy Diamond Contracts
+Testing creation and deploy Diamond Contracts in Mumbai Network
 
 ## To interact with contracts 
 
