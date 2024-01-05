@@ -6,6 +6,7 @@ library LibA {
 struct DiamondStorage {
     address owner;
     bytes32 dataA;
+    string testSring;
 }
 
 
@@ -25,5 +26,14 @@ contract FacetA {
 
     function getDataA() external view returns (bytes32) {
         return LibA.diamondStorage().dataA;
+    }
+
+      function setStringData(string memory _string) external {
+        LibA.DiamondStorage storage ds = LibA.diamondStorage();
+        ds.testSring = _string;
+    }
+
+    function getStringData() external view returns (string memory) {
+        return LibA.diamondStorage().testSring;
     }
 }
