@@ -3,6 +3,7 @@
 require('@nomiclabs/hardhat-waffle')
 require("hardhat-gas-reporter");
 require("@nomiclabs/hardhat-etherscan");
+require('dotenv').config();
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
 task('accounts', 'Prints the list of accounts', async () => {
@@ -12,6 +13,15 @@ task('accounts', 'Prints the list of accounts', async () => {
     console.log(account.address)
   }
 })
+
+const rpcs = require("./RPC.json")
+//url: "https://rpc-mumbai.maticvigil.com",
+//url: "https://matic-mumbai.chainstacklabs.com",
+//url: "https://polygon-mumbai-bor.publicnode.com",
+
+
+
+const { PRIVATE_KEY_TESTNET, ETHERSCAN_API_KEY } = process.env;
 
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
@@ -30,15 +40,19 @@ module.exports = {
   gasReporter: {
     enabled: true
   },
+  evmVersion: "london",
+  defaultNetwork: "mumbai",
   networks: {
-    goerli: {
-        url: "YOUR_QUICKNODE_HTTP_ENDPOINT",
-        accounts: ["YOUR_PRIVATE_KEY"]
+    mumbai: {
+      url: rpcs.vigil,
+      chainId: 80001,
+      gasPrice: 35000000000,
+      accounts: [`0x${PRIVATE_KEY_TESTNET}`]
     }
-    },
+  }
+  ,
     etherscan: {
         // Your API key for Etherscan
-        // Obtain one at https://etherscan.io/
-        apiKey: "YOUR_ETHERSCAN_API_KEY"
+        apiKey: ETHERSCAN_API_KEY
     }
 }
